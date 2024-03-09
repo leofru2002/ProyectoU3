@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d4298f96a2894be281a0fa591a0bfeb0" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="bitacora_espe_u3Model.novelties" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bitacora_espe_u3Model.pending_tasks" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bitacora_espe_u3Model.users" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bitacora_espe_u3Model.view_novelties" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bitacora_espe_u3Model.view_pending_task" Width="1.5" PointX="7.875" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bitacora_espe_u3Model.view_pending_tasks" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="bitacora_espe_u3Model.FK__novelties__Guard__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="bitacora_espe_u3Model.FK__pending_t__userC__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="bitacora_espe_u3Model.FK__pending_t__userD__3A81B327" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

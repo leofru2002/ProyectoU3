@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bitacora_espe_u3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="novelties">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hour" Type="datetime" />
+          <Property Name="novelty" Type="varchar" MaxLength="255" />
+          <Property Name="Guard_id" Type="int" />
+        </EntityType>
+        <EntityType Name="pending_tasks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hour_create" Type="datetime" />
+          <Property Name="hour_done" Type="datetime" />
+          <Property Name="pending_task" Type="nvarchar(max)" />
+          <Property Name="task_done" Type="bit" />
+          <Property Name="userCreate_id" Type="int" />
+          <Property Name="userDone_id" Type="int" />
+          <Property Name="observations" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="blood_type" Type="varchar" MaxLength="255" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="identification_card" Type="varchar" MaxLength="255" />
+          <Property Name="is_admin" Type="bit" />
+          <Property Name="last_names" Type="varchar" MaxLength="255" />
+          <Property Name="names" Type="varchar" MaxLength="255" />
+          <Property Name="password_users" Type="varchar" MaxLength="255" />
+          <Property Name="phone" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_novelties' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="view_novelties">
+          <Key>
+            <PropertyRef Name="guard" />
+          </Key>
+          <Property Name="novelty" Type="varchar" MaxLength="255" />
+          <Property Name="hour" Type="datetime" />
+          <Property Name="guard" Type="varchar" MaxLength="511" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_pending_task' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="view_pending_task">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="guardCreate" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="hour_create" Type="datetime" />
+          <Property Name="pending_task" Type="nvarchar(max)" />
+          <Property Name="guardCreate" Type="varchar" MaxLength="511" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_pending_tasks' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="view_pending_tasks">
+          <Key>
+            <PropertyRef Name="guardCreate" />
+            <PropertyRef Name="guardDone" />
+          </Key>
+          <Property Name="pending_tasks" Type="nvarchar(max)" />
+          <Property Name="hour_create" Type="datetime" />
+          <Property Name="hour_done" Type="datetime" />
+          <Property Name="guardCreate" Type="varchar" MaxLength="511" Nullable="false" />
+          <Property Name="guardDone" Type="varchar" MaxLength="511" Nullable="false" />
+          <Property Name="observations" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__novelties__Guard__3D5E1FD2">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="novelties" Type="Self.novelties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="novelties">
+              <PropertyRef Name="Guard_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pending_t__userC__398D8EEE">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="pending_tasks" Type="Self.pending_tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pending_tasks">
+              <PropertyRef Name="userCreate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pending_t__userD__3A81B327">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="pending_tasks" Type="Self.pending_tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pending_tasks">
+              <PropertyRef Name="userDone_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bitacora_espe_u3ModelStoreContainer">
+          <EntitySet Name="novelties" EntityType="Self.novelties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pending_tasks" EntityType="Self.pending_tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_novelties" EntityType="Self.view_novelties" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_novelties].[novelty] AS [novelty], 
+    [view_novelties].[hour] AS [hour], 
+    [view_novelties].[guard] AS [guard]
+    FROM [dbo].[view_novelties] AS [view_novelties]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_pending_task" EntityType="Self.view_pending_task" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_pending_task].[id] AS [id], 
+    [view_pending_task].[hour_create] AS [hour_create], 
+    [view_pending_task].[pending_task] AS [pending_task], 
+    [view_pending_task].[guardCreate] AS [guardCreate]
+    FROM [dbo].[view_pending_task] AS [view_pending_task]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_pending_tasks" EntityType="Self.view_pending_tasks" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_pending_tasks].[pending_tasks] AS [pending_tasks], 
+    [view_pending_tasks].[hour_create] AS [hour_create], 
+    [view_pending_tasks].[hour_done] AS [hour_done], 
+    [view_pending_tasks].[guardCreate] AS [guardCreate], 
+    [view_pending_tasks].[guardDone] AS [guardDone], 
+    [view_pending_tasks].[observations] AS [observations]
+    FROM [dbo].[view_pending_tasks] AS [view_pending_tasks]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__novelties__Guard__3D5E1FD2" Association="Self.FK__novelties__Guard__3D5E1FD2">
+            <End Role="users" EntitySet="users" />
+            <End Role="novelties" EntitySet="novelties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pending_t__userC__398D8EEE" Association="Self.FK__pending_t__userC__398D8EEE">
+            <End Role="users" EntitySet="users" />
+            <End Role="pending_tasks" EntitySet="pending_tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pending_t__userD__3A81B327" Association="Self.FK__pending_t__userD__3A81B327">
+            <End Role="users" EntitySet="users" />
+            <End Role="pending_tasks" EntitySet="pending_tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bitacora_espe_u3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="novelties">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hour" Type="DateTime" Precision="3" />
+          <Property Name="novelty" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Guard_id" Type="Int32" />
+          <NavigationProperty Name="users" Relationship="Self.FK__novelties__Guard__3D5E1FD2" FromRole="novelties" ToRole="users" />
+        </EntityType>
+        <EntityType Name="pending_tasks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hour_create" Type="DateTime" Precision="3" />
+          <Property Name="hour_done" Type="DateTime" Precision="3" />
+          <Property Name="pending_task" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="task_done" Type="Boolean" />
+          <Property Name="userCreate_id" Type="Int32" />
+          <Property Name="userDone_id" Type="Int32" />
+          <Property Name="observations" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="users" Relationship="Self.FK__pending_t__userC__398D8EEE" FromRole="pending_tasks" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__pending_t__userD__3A81B327" FromRole="pending_tasks" ToRole="users" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="blood_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="identification_card" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="is_admin" Type="Boolean" />
+          <Property Name="last_names" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="names" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password_users" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="novelties" Relationship="Self.FK__novelties__Guard__3D5E1FD2" FromRole="users" ToRole="novelties" />
+          <NavigationProperty Name="pending_tasks" Relationship="Self.FK__pending_t__userC__398D8EEE" FromRole="users" ToRole="pending_tasks" />
+          <NavigationProperty Name="pending_tasks1" Relationship="Self.FK__pending_t__userD__3A81B327" FromRole="users" ToRole="pending_tasks" />
+        </EntityType>
+        <EntityType Name="view_novelties">
+          <Key>
+            <PropertyRef Name="guard" />
+          </Key>
+          <Property Name="novelty" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="hour" Type="DateTime" Precision="3" />
+          <Property Name="guard" Type="String" MaxLength="511" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="view_pending_task">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="guardCreate" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="hour_create" Type="DateTime" Precision="3" />
+          <Property Name="pending_task" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="guardCreate" Type="String" MaxLength="511" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="view_pending_tasks">
+          <Key>
+            <PropertyRef Name="guardCreate" />
+            <PropertyRef Name="guardDone" />
+          </Key>
+          <Property Name="pending_tasks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hour_create" Type="DateTime" Precision="3" />
+          <Property Name="hour_done" Type="DateTime" Precision="3" />
+          <Property Name="guardCreate" Type="String" MaxLength="511" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="guardDone" Type="String" MaxLength="511" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__novelties__Guard__3D5E1FD2">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="novelties" Type="Self.novelties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="novelties">
+              <PropertyRef Name="Guard_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pending_t__userC__398D8EEE">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="pending_tasks" Type="Self.pending_tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pending_tasks">
+              <PropertyRef Name="userCreate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pending_t__userD__3A81B327">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="pending_tasks" Type="Self.pending_tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pending_tasks">
+              <PropertyRef Name="userDone_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bitacora_espe_u3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="novelties" EntityType="Self.novelties" />
+          <EntitySet Name="pending_tasks" EntityType="Self.pending_tasks" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="view_novelties" EntityType="Self.view_novelties" />
+          <EntitySet Name="view_pending_task" EntityType="Self.view_pending_task" />
+          <EntitySet Name="view_pending_tasks" EntityType="Self.view_pending_tasks" />
+          <AssociationSet Name="FK__novelties__Guard__3D5E1FD2" Association="Self.FK__novelties__Guard__3D5E1FD2">
+            <End Role="users" EntitySet="users" />
+            <End Role="novelties" EntitySet="novelties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pending_t__userC__398D8EEE" Association="Self.FK__pending_t__userC__398D8EEE">
+            <End Role="users" EntitySet="users" />
+            <End Role="pending_tasks" EntitySet="pending_tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pending_t__userD__3A81B327" Association="Self.FK__pending_t__userD__3A81B327">
+            <End Role="users" EntitySet="users" />
+            <End Role="pending_tasks" EntitySet="pending_tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bitacora_espe_u3ModelStoreContainer" CdmEntityContainer="bitacora_espe_u3Entities">
+          <EntitySetMapping Name="novelties">
+            <EntityTypeMapping TypeName="bitacora_espe_u3Model.novelties">
+              <MappingFragment StoreEntitySet="novelties">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="hour" ColumnName="hour" />
+                <ScalarProperty Name="novelty" ColumnName="novelty" />
+                <ScalarProperty Name="Guard_id" ColumnName="Guard_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pending_tasks">
+            <EntityTypeMapping TypeName="bitacora_espe_u3Model.pending_tasks">
+              <MappingFragment StoreEntitySet="pending_tasks">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="hour_create" ColumnName="hour_create" />
+                <ScalarProperty Name="hour_done" ColumnName="hour_done" />
+                <ScalarProperty Name="pending_task" ColumnName="pending_task" />
+                <ScalarProperty Name="task_done" ColumnName="task_done" />
+                <ScalarProperty Name="userCreate_id" ColumnName="userCreate_id" />
+                <ScalarProperty Name="userDone_id" ColumnName="userDone_id" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="bitacora_espe_u3Model.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="blood_type" ColumnName="blood_type" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="identification_card" ColumnName="identification_card" />
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+                <ScalarProperty Name="last_names" ColumnName="last_names" />
+                <ScalarProperty Name="names" ColumnName="names" />
+                <ScalarProperty Name="password_users" ColumnName="password_users" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_novelties">
+            <EntityTypeMapping TypeName="bitacora_espe_u3Model.view_novelties">
+              <MappingFragment StoreEntitySet="view_novelties">
+                <ScalarProperty Name="novelty" ColumnName="novelty" />
+                <ScalarProperty Name="hour" ColumnName="hour" />
+                <ScalarProperty Name="guard" ColumnName="guard" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_pending_task">
+            <EntityTypeMapping TypeName="bitacora_espe_u3Model.view_pending_task">
+              <MappingFragment StoreEntitySet="view_pending_task">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="hour_create" ColumnName="hour_create" />
+                <ScalarProperty Name="pending_task" ColumnName="pending_task" />
+                <ScalarProperty Name="guardCreate" ColumnName="guardCreate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_pending_tasks">
+            <EntityTypeMapping TypeName="bitacora_espe_u3Model.view_pending_tasks">
+              <MappingFragment StoreEntitySet="view_pending_tasks">
+                <ScalarProperty Name="pending_tasks" ColumnName="pending_tasks" />
+                <ScalarProperty Name="hour_create" ColumnName="hour_create" />
+                <ScalarProperty Name="hour_done" ColumnName="hour_done" />
+                <ScalarProperty Name="guardCreate" ColumnName="guardCreate" />
+                <ScalarProperty Name="guardDone" ColumnName="guardDone" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
