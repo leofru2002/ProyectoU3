@@ -1,45 +1,155 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - ESPE-SD BITÁCORA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Starter</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/all.min.css")
+    @Styles.Render("~/Content/tempusdominus-bootstrap-4.min.css")
+    @Styles.Render("~/Content/adminlte.min.css")
+    @Styles.Render("~/Content/icheck-bootstrap.min.css")
+    @Styles.Render("~/Content/jqvmap.min.css")
+    @Styles.Render("~/Content/icheck-bootstrap.min.css")
+    @Styles.Render("~/Content/OverlayScrollbars.min.css")
+    @Styles.Render("~/Content/daterangepicker.css")
+    @Styles.Render("~/Content/summernote-bs4.min.css")
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-success">
-        <div class="container">
-            @Html.ActionLink("UFA ESPE-SD", "Binnacle", "Novelty", new { area = "" }, new { @class = "navbar-brand mr-5 fas" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink(" NOVEDADES", "Binnacle", "Novelty", new { area = "" }, new { @class = "nav-link text-white fs-5 fas fa-newspaper" })</li>
-                    <li>@Html.ActionLink(" CONSIGNAS", "Pendings", "PendingTask", new { area = "" }, new { @class = "nav-link text-white fs-5 fas fa-tasks" })</li>
-                    <li>@Html.ActionLink(" ADMINISTRADOR", "Admins", "Admin", new { area = "" }, new { @class = "nav-link text-white fs-5 fas fa-user-cog" })</li>
-                </ul>
-            </div>
-            <a href="@Url.Action("Index", "Login")" class="btn btn-outline-light ms-3">
-                <span class="fas fa-times"></span> <!-- Icono "X" -->
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#">
+                        <i class="fas fa-bars"></i>
+                        <span class="sr-only"></span>
+                    </a>
+                </li>
+
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a href="@Url.Action("Index", "Login")" class="dropdown-item">
+                            <i class="fas fa-times"></i> Cerrar Sesión <!-- Icono de cerrar sesión -->
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-success elevation-4">
+            <!-- Brand Logo -->
+            <a href="@Url.Action("Index", "Home")" class="brand-link">
+                <img src="https://www.logolynx.com/images/logolynx/b6/b6f9af025aed21110324524b95a64472.jpeg" alt="ESPE" class="brand-image" style="opacity: .8">
+                <span class="brand-text font-weight-light">UFA ESPE-SD</span>
             </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Home")" class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p>
+                                    Inicio
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-header ">
+                            ACTUALIZACIÓN
+                        </li>
+                        <li class="nav-item">
+
+                            <a href="@Url.Action("Binnacle", "Novelty")" class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Novelty" ? "active" : "")">
+                                <i class="nav-icon fas fa-newspaper"></i>
+                                <p>
+                                    Novedades
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-header ">
+                            DIRECTRICES
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Pendings", "PendingTask")" class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "PendingTask" ? "active" : "")">
+                                <i class="nav-icon fas fa-tasks"></i>
+                                <p>
+                                    Consignas
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-header ">
+                            GESTIÓN
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Admins", "Admin")" class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Admin" ? "active" : "")">
+                                <i class="nav-icon fas fa-user-cog"></i>
+                                <p>
+                                    Administrador
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">@ViewBag.Title</h1>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
         </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
             <p>&copy; @DateTime.Now.Year - Grupo Dinamita ASP.NET</p>
+
         </footer>
     </div>
+    <!-- ./wrapper -->
 
+    @Scripts.Render("~/Admin/js")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
