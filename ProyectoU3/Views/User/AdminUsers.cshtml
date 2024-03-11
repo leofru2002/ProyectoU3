@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "AdminUsers";
+}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col text-center">
+            <h1>ADMINISTRACIÓN DE USUARIO</h1>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-10 offset-1 d-flex justify-content-center">
+            <a href="~/User/AgregarUsers" class="btn btn-lg btn-success" data-toggle="modal" data-target="#modalRegistro">
+                REGISTRAR NUEVO USUARIO
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-4 justify-content-center">
+        <div class="co-12">
+            <div class="card">
+                <div class="card-header text-center" style="padding:0; padding-top:3px">
+                    <div>
+                        <h3>USUARIOS ACTUALES</h3>
+                    </div>
+                    <div class="card-tools" style=" ">
+                    </div>
+                </div>
+
+                <div class="card-body table-responsive pl-2 pr-2">
+                    <table id="movVehiclesTable" class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ORD</th>
+                                <th class="text-center">NOMBRE Y APELLIDO</th>
+                                <th class="text-center">CORREO ELECTRÓNICO</th>
+                                <th class="text-center">CÉDULA DE IDENTIDAD</th>
+                                <th class="text-center">CEULAR</th>
+                                <th class="text-center">TIPO SANGRE</th>
+                                <th class="text-center">ROL</th>
+                                <th class="text-center">EDITAR</th>
+                                <th class="text-center">ELIMINAR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                    <form action="" method="POST">
+                                        <button type="button" onclick="location.href='@Url.Action("UpdateUsers", "User")'" class="btn btn-secondary btn-sm">EDITAR</button>
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <form action="" method="POST">
+                                        <button type="button" onclick="location.href='@Url.Action("DeleteUsers", "User")'" class="btn btn-danger btn-sm">ELIMINAR</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

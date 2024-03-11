@@ -128,8 +128,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NoveltiesController.cs" />
+    <Compile Include="Controllers\NoveltyController.cs" />
+    <Compile Include="Controllers\PendingTaskController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,11 +239,19 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Novelties\Index.cshtml" />
+    <Content Include="Views\Admin\Admins.cshtml" />
+    <Content Include="Views\Novelty\Binnacle.cshtml" />
+    <Content Include="Views\Novelty\AgregarBinnacle.cshtml" />
+    <Content Include="Views\PendingTask\Pendings.cshtml" />
+    <Content Include="Views\PendingTask\AgregarPendings.cshtml" />
+    <Content Include="Views\PendingTask\EditPendings.cshtml" />
+    <Content Include="Views\User\AdminUsers.cshtml" />
+    <Content Include="Views\User\DeleteUsers.cshtml" />
+    <Content Include="Views\User\UpdateUsers.cshtml" />
+    <Content Include="Views\User\AgregarUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Bitacora\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

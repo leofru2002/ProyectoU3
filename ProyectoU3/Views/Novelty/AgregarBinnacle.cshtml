@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "AgregarBinnacle";
+}
+
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col text-center">
+            <h1>BITÁCORA NOVEDADES UFA-ESPE "SANTO DOMINGO"</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">NUEVA NOVEDAD</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <label for="novelty">Detalle de la novedad:</label>
+                            <textarea id="novelty" name="novelty" class="form-control"></textarea>
+                        </div>
+                        <div class="row mt-3 justify-content-end">
+                            <div class="col-md-5 pr-1">
+                                <button type="button" onclick="location.href='@Url.Action("Binnacle", "Novelty")'" class="btn btn-danger btn-block">CANCELAR</button>
+                            </div>
+                            <div class="col-md-5 pr-1">
+                                <button type="submit" class="btn btn-success btn-block">GUARDAR</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Binnacle";
+}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col text-center">
+            <h1>BITÁCORA NOVEDADES UFA-ESPE "SANTO DOMINGO"</h1>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-10 offset-1 d-flex justify-content-center">
+            <a href="~/Novelty/AgregarBinnacle" class="btn btn-lg btn-success" data-toggle="modal" data-target="#modalRegistro">
+                REGISTRAR NOVEDAD
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-tools">
+                    </div>
+                </div>
+                <div class="card-body table-responsive pl-2 pr-2">
+                    <table id="binnacleTable" class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="text-center align-middle">ORD</th>
+                                <th class="text-center align-middle" colspan="2">NOVEDADES</th>
+                                <th class="text-center align-middle">FECHA/HORA</th>
+                                <th class="text-center align-middle text-wrap">GUARDIA TURNO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle"></td>
+                                <td class="text-wrap" style="min-width: 100px; max-width: 300px;"></td>
+                                <td class="align-middle" style="min-width: 10px; max-width: 30px;">
+                                    <div class="btnCopiar">
+                                        <i class="fa-solid fa-copy fa-lg" style="color: #3b9834;"></i>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-wrap"></td>
+                                <td class="align-middle text-wrap" style="min-width: 50px; max-width: 300px;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
