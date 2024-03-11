@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bitacora_espe_u3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="bitacora_espe_u3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="novelties">
           <Key>
             <PropertyRef Name="id" />
@@ -27,6 +27,16 @@
           <Property Name="userDone_id" Type="int" />
           <Property Name="observations" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="users">
           <Key>
             <PropertyRef Name="id" />
@@ -40,6 +50,7 @@
           <Property Name="names" Type="varchar" MaxLength="255" />
           <Property Name="password_users" Type="varchar" MaxLength="255" />
           <Property Name="phone" Type="varchar" MaxLength="255" />
+          <Property Name="url_image" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_novelties' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -116,6 +127,7 @@ advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_pending_tasks' no 
         <EntityContainer Name="bitacora_espe_u3ModelStoreContainer">
           <EntitySet Name="novelties" EntityType="Self.novelties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pending_tasks" EntityType="Self.pending_tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="view_novelties" EntityType="Self.view_novelties" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -155,8 +167,7 @@ advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_pending_tasks' no 
             <End Role="pending_tasks" EntitySet="pending_tasks" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bitacora_espe_u3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -201,6 +212,7 @@ advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_pending_tasks' no 
           <NavigationProperty Name="novelties" Relationship="Self.FK__novelties__Guard__3D5E1FD2" FromRole="users" ToRole="novelties" />
           <NavigationProperty Name="pending_tasks" Relationship="Self.FK__pending_t__userC__398D8EEE" FromRole="users" ToRole="pending_tasks" />
           <NavigationProperty Name="pending_tasks1" Relationship="Self.FK__pending_t__userD__3A81B327" FromRole="users" ToRole="pending_tasks" />
+          <Property Name="url_image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="view_novelties">
           <Key>
@@ -287,7 +299,18 @@ advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_pending_tasks' no 
             <End Role="users" EntitySet="users" />
             <End Role="pending_tasks" EntitySet="pending_tasks" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="bitacora_espe_u3Model.sysdiagrams" />
         </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -321,6 +344,7 @@ advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_pending_tasks' no 
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="bitacora_espe_u3Model.users">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="url_image" ColumnName="url_image" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="blood_type" ColumnName="blood_type" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -361,6 +385,17 @@ advertencia 6002: La tabla o vista 'bitacora_espe_u3.dbo.view_pending_tasks' no 
                 <ScalarProperty Name="guardCreate" ColumnName="guardCreate" />
                 <ScalarProperty Name="guardDone" ColumnName="guardDone" />
                 <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="bitacora_espe_u3Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

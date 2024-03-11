@@ -31,5 +31,6 @@ namespace ProyectoU3.Models
         public virtual DbSet<view_novelties> view_novelties { get; set; }
         public virtual DbSet<view_pending_task> view_pending_task { get; set; }
         public virtual DbSet<view_pending_tasks> view_pending_tasks { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

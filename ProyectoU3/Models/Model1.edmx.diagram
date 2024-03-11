@@ -14,6 +14,7 @@
         <AssociationConnector Association="bitacora_espe_u3Model.FK__novelties__Guard__3D5E1FD2" ManuallyRouted="false" />
         <AssociationConnector Association="bitacora_espe_u3Model.FK__pending_t__userC__398D8EEE" ManuallyRouted="false" />
         <AssociationConnector Association="bitacora_espe_u3Model.FK__pending_t__userD__3A81B327" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="bitacora_espe_u3Model.sysdiagrams" Width="1.5" PointX="5.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

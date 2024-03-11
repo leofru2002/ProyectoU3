@@ -31,6 +31,7 @@ namespace ProyectoU3.Models
         public string names { get; set; }
         public string password_users { get; set; }
         public string phone { get; set; }
+        public string url_image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<novelties> novelties { get; set; }
